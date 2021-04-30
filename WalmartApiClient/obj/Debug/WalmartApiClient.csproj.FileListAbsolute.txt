@@ -1,7 +1,0 @@
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\bin\Debug\WalmartApiClient.exe.config
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\bin\Debug\WalmartApiClient.exe
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\bin\Debug\WalmartApiClient.pdb
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\obj\Debug\WalmartApiClient.csprojAssemblyReference.cache
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\obj\Debug\WalmartApiClient.csproj.CoreCompileInputs.cache
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\obj\Debug\WalmartApiClient.exe
-E:\2021Tasks\202104\walmart-api\walmartapi\WalmartApiClient\obj\Debug\WalmartApiClient.pdb
