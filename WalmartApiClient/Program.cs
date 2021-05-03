@@ -10,7 +10,8 @@ namespace WalmartApiClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(SignatureGenerator.generateSignature());
+            WalmartApiClient apiClient = new WalmartApiClient();
+            Console.WriteLine(apiClient.getDepartmentList("11221"));
             while (true) ;
         }
     }

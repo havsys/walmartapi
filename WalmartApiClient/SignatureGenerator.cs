@@ -7,8 +7,8 @@ namespace WalmartApiClient
 {
     class SignatureGenerator
     {
-        public static string PRIVATE_KEY_VERSION = "4";        
-        public static string CONSUMER_ID_PROD = "fac77a69-e4e0-4642-a7cb-a266baee1f4e";      
+        public static string PRIVATE_KEY_VERSION = "4";
+        public static string CONSUMER_ID_PROD = "fac77a69-e4e0-4642-a7cb-a266baee1f4e";
         public static string PRIVATE_KEY = "MIIEowIBAAKCAQEAtkHuPQnpxp8Pknd2uQ2/WnSwhWjcrBmB0Vw2NWvjxxK26ZwIEcKvuqZUBhbyJF3zSvCqoz1T32/S2rTnMO3B/9WfRKyR5XiaLgTaceSWdBpflzClyuUHFyCSAgYiziy9FZY4BbPHovoHUVnpORPGVa3evBvXYNCpbQka15NzDJfhG0pdBW/2Coojom+9iG5iaJlcuOA9VveNybNutUmgAP5pA9C1E5s0j+BaE7GjzjUes3hs2giUm/Fd3GY3rbnfHGZaYbYROG1DP5Al/Hs7HkMAaNk0TBg/reg4h2zQo8ciUsFGayFRTi21fhbiLcV1jAXc322hdRy8wA9Au7OFawIDAQABAoIBAEGmmCGGi54PN7XDsJFSIWZ8+ATmU+7uNTPr6l7t4RuZYyfdG48COPib51JWO5zb9sI81Mp+UdL/Xc2IMmsOib4U/gznuJoXCjqfZux1sbhas6orTN08CITNJ6rw+OKZfPbkqINtUfEj7TThlUAJHn1IZx4NTVTDdPQgvnl+1IdpJnvZnWe2wcaRfvI4Q2NbnV7JXVckBsfpmb01Q9kpFFARItu0gOSbayvo2fJUuEvi8ZHfu5npeTAy3DUiQPKJykQ8fisV85KUnR56YMNJ0h7zI5kXcuN8074z2GSYtjHQnZ9bAJ1q7JPYxpj9XNmq+NOV6hyCcbNXj1mL5MHRJzkCgYEA20mpvxJag+sCf7yRchMSVNpQILHqhECMTObP0+AkUxu6TnXiZFrgYixit415wdghpYgHA64jtVA+1+j6dXkHX3cURyTjZWrFadG1g5N78KSBMw6XRLQcN6sokyBGAY5s/O0eVIcie593WVF6m7yAaWkaxLJfGLMbBbRjHXwoFU0CgYEA1MU1rd2GDtRrcIrtH4LGHNH0/rrk9Wos/Vbu6izgW8Am9IlGWm0OJsDWditbpqiJgggLS9o8cDuHL2y6/yGMltooBxMuBA8Q7CUxNlRHRUMT2sZ1/Q1VRuKkrk0f0Q/r1W6QvNuTEI7vVLSCyv3FBpmL2k4VEi2qXjVa46vsSZcCgYA1uhmd1+hXc+f71f6ovWV7ZrXFHPJBjvMREGgRGFSuDBgciyN5xQ4+33McV8xiIwszXF2jmDHlhZCwI8PhrlKRIELWn4IbYgqWP6xCXYs7TYLeOI/1ZE+ZkBTz3y9nyDaJzarluOpI8awzNRRePdQUf4zwbmeATLmtLyItojLL7QKBgG3zl4DIqD1Dol3fPRh6kPxVt4BnfmggPS2R3hbfp/Vh//+AbP3Pu29lWa5pS4x9LcondAb3uSHacUqdqqirYqaWB/dX/wCT9I/DzIGh3c66EimNQ23IlRfziVyVeGqmCp4Z6+vcoEv/QUiJm8lgiI+Xi4D9tr/VH2RduCFNN+bzAoGBAJnZaHNgpQagxvjUgpQCVqsB7zvlpbasxsKZZw2YMWT+C/3NSX1+SbunCBXn9wFPkP4zEZZWKATeb75ezSjOsWzXMLTewOfC5E2TFZsr1OJQg4dV4GLW6GA05jFJaYqbAMwUh4WDN9houYKPAJ6mPn3GmUGJY1dl1CS6dq5w62hD";
 
         public static string CONSUMERIDKEY = "WM_CONSUMER.ID";
@@ -16,14 +16,13 @@ namespace WalmartApiClient
         public static string PRIVATEKEYVERSIONKEY = "WM_SEC.KEY_VERSION";
         public static string AUTHSIGNATUREKEY = "WM_SEC.AUTH_SIGNATURE";
 
-        public static string generateSignature()
+        public static string generateSignature(string timeStamp)
         {
             string signature = "";
-            string timeNow = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-            Console.WriteLine(timeNow);
+
             Hashtable headersToSign = new Hashtable();
             headersToSign.Add(CONSUMERIDKEY, CONSUMER_ID_PROD);
-            headersToSign.Add(CONSUMERINTIMESTAMPKEY, timeNow);
+            headersToSign.Add(CONSUMERINTIMESTAMPKEY, timeStamp);
             headersToSign.Add(PRIVATEKEYVERSIONKEY, PRIVATE_KEY_VERSION);
 
             string[] canonicalizedStr = canonicalize(headersToSign);
