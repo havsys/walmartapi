@@ -63,7 +63,7 @@ namespace WalmartApiClient
             return taxonomyList;
         }
 
-        public string search(string categoryId, string query, int numberOfItems)
+        public string search(string categoryId, string query, int numberOfItems, int startOffSet)
         {
             string searchResult = "";
             if (query == "")
@@ -71,7 +71,10 @@ namespace WalmartApiClient
 
             if (numberOfItems < 0) numberOfItems = 10;
             if (numberOfItems > 25) numberOfItems = 25;
-            string url = URL_PREFIX + "v2/search?query=" + query + "&numItems=" + numberOfItems.ToString() +  ((categoryId != "") ? "&categoryId=" + categoryId : "");
+
+            if (startOffSet < 0) startOffSet = 0;
+
+            string url = URL_PREFIX + "v2/search?query=" + query + "&numItems=" + numberOfItems.ToString() + "&start=" + startOffSet.ToString() +  ((categoryId != "") ? "&categoryId=" + categoryId : "");
 
             Console.WriteLine(url);
 
