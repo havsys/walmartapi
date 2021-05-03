@@ -11,10 +11,10 @@ namespace WalmartApiClient
     class WalmartApiClient
     {
         public static string URL_PREFIX = "https://developer.api.walmart.com/api-proxy/service/affil/";
-        
+
         private HttpClient httpClient;
         private string authSignature = "";
-        
+
 
         public WalmartApiClient()
         {
@@ -24,7 +24,7 @@ namespace WalmartApiClient
         public string getDepartmentList(string zipCode)
         {
             string departmentList = "";
-            string url = URL_PREFIX + "/product/v2/stores?zip=" + zipCode;
+            string url = URL_PREFIX + "product/v2/stores?zip=" + zipCode;
 
             addHeaders(httpClient);
             try
@@ -33,14 +33,62 @@ namespace WalmartApiClient
                 response.EnsureSuccessStatusCode();
                 var responseContent = response.Content;
                 departmentList = responseContent.ReadAsStringAsync().Result;
-                return departmentList;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
                 resetAuthSignature();
-                return "";
             }
+            return departmentList;
+        }
+
+        public string getTaxonomyList()
+        {
+            string taxonomyList = "";
+            string url = URL_PREFIX + "product/v2/taxonomy";
+
+            addHeaders(httpClient);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                var responseContent = response.Content;
+                taxonomyList = responseContent.ReadAsStringAsync().Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                resetAuthSignature();
+            }
+            return taxonomyList;
+        }
+
+        public string search(string categoryId, string query, int numberOfItems)
+        {
+            string searchResult = "";
+            if (query == "")
+                return searchResult;
+
+            if (numberOfItems < 0) numberOfItems = 10;
+            if (numberOfItems > 25) numberOfItems = 25;
+            string url = URL_PREFIX + "v2/search?query=" + query + "&numItems=" + numberOfItems.ToString() +  ((categoryId != "") ? "&categoryId=" + categoryId : "");
+
+            Console.WriteLine(url);
+
+            addHeaders(httpClient);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                var responseContent = response.Content;
+                searchResult = responseContent.ReadAsStringAsync().Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                resetAuthSignature();
+            }
+            return searchResult;
         }
 
         private void resetAuthSignature()
@@ -58,6 +106,7 @@ namespace WalmartApiClient
             if (authSignature == "")
             {
                 authSignature = SignatureGenerator.generateSignature(timeNow);
+                Console.WriteLine(authSignature);
             }
             httpClient.DefaultRequestHeaders.Add(SignatureGenerator.AUTHSIGNATUREKEY, authSignature);
         }

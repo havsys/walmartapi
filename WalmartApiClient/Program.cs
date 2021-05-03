@@ -11,7 +11,7 @@ namespace WalmartApiClient
         static void Main(string[] args)
         {
             WalmartApiClient apiClient = new WalmartApiClient();
-            Console.WriteLine(apiClient.getDepartmentList("11221"));
+            Console.WriteLine(apiClient.search("", "medicines", 10));
             while (true) ;
         }
     }
