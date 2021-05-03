@@ -74,7 +74,7 @@ namespace WalmartApiClient
 
             if (startOffSet < 0) startOffSet = 0;
 
-            string url = URL_PREFIX + "v2/search?query=" + query + "&numItems=" + numberOfItems.ToString() + "&start=" + startOffSet.ToString() +  ((categoryId != "") ? "&categoryId=" + categoryId : "");
+            string url = URL_PREFIX + "product/v2/search?query=" + query + "&numItems=" + numberOfItems.ToString() + "&start=" + startOffSet.ToString() +  ((categoryId != "") ? "&categoryId=" + categoryId : "");
 
             Console.WriteLine(url);
 
