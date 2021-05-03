@@ -52,7 +52,7 @@ namespace WalmartApiClient
         {
             httpClient.DefaultRequestHeaders.Add(SignatureGenerator.PRIVATEKEYVERSIONKEY, SignatureGenerator.PRIVATE_KEY_VERSION);
             httpClient.DefaultRequestHeaders.Add(SignatureGenerator.CONSUMERIDKEY, SignatureGenerator.CONSUMER_ID_PROD);
-            string timeNow = (DateTimeOffset.Now.ToUnixTimeMilliseconds() - 2000000).ToString();
+            string timeNow = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
             Console.WriteLine(timeNow);
             httpClient.DefaultRequestHeaders.Add(SignatureGenerator.CONSUMERINTIMESTAMPKEY, timeNow);
             if (authSignature == "")
