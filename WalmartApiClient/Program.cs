@@ -10,6 +10,8 @@ namespace WalmartApiClient
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(SignatureGenerator.generateSignature());
+            while (true) ;
         }
     }
 }
